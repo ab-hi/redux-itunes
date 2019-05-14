@@ -17,7 +17,7 @@ function* mySaga() {
 
 function searchItunesApi(query){
 	// console.log(query)
-	fetch(`https://itunes.apple.com/search?term=${query}`, {'Access-Control-Allow-Origin': '*'})
+	return fetch(`https://itunes.apple.com/search?term=${query}`, {'Access-Control-Allow-Origin': '*'})
 		.then(data => data.json())
 			.then(data => {
 				// console.log('api fetched', data)
