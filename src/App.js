@@ -1,25 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
+import {Search, TrackList} from './components';
 import './App.css';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
+import reducers from './reducers'
+import createSagaMiddleware from 'redux-saga'
+import mySaga from './sagas'
+const sagaMiddleware = createSagaMiddleware()
+ 
+
+let store = createStore(reducers, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(mySaga)
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Search />
+      <TrackList />
+    </Provider>
   );
 }
 
