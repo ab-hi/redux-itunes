@@ -4,7 +4,7 @@ export default (state={loading: false, tracks:[]}, action) => {
 			return {loading: true, tracks:[]}
 		case 'TRACK_SEARCH_SUCCEEDED':
 			console.log('TRACK_SEARCH_SUCCEEDED reducer', action)
-			return {loading: false, tracks: action.tracks}
+			return {loading: false, tracks: action.tracks, genres:action.genres, artists: action.artists}
 			
 		case 'TRACK_SEARCH_FAILED':
 			console.log('TRACK_SEARCH_FAILED', action)

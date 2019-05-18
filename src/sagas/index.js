@@ -4,7 +4,19 @@ import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 function* searchItunesApiGenerator(action){
 	try{
 		const tracks = yield call(searchItunesApi, action.payload);
-		yield put({type: "TRACK_SEARCH_SUCCEEDED", tracks: tracks});
+		let genres = []
+		let artists = []
+
+		tracks.map(track => {
+			if(genres.indexOf(track.primaryGenreName) === -1){
+				genres.push(track.primaryGenreName)
+			}
+			if(artists.indexOf(track.artistName) == -1){
+				artists.push(track.artistName)
+			}
+		})
+
+		yield put({type: "TRACK_SEARCH_SUCCEEDED", tracks, genres, artists});
 	}
 	catch(e){
 		yield put({type: "TRACK_SEARCH_FAILED", message: e.message});

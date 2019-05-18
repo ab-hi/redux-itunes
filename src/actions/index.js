@@ -1,9 +1,15 @@
 const handleSearch = (query) => {
-	console.log(query)
 	return({
 		type: 'TRACK_SEARCH_REQUESTED',
 		payload: query
 	})
 }
 
-export {handleSearch}
+const onGenreChange = (filter, tracks) => {
+	return({
+		type: 'FILTER_GENRE',
+		payload : {filter, tracks}
+	})
+}
+
+export {handleSearch, onGenreChange}

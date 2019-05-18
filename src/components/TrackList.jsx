@@ -1,6 +1,7 @@
 import React from "react";
-import { List, Avatar, Icon } from "antd";
+import { List, Avatar, Icon, Row, Col } from "antd";
 import { connect } from "react-redux";
+import Filters from './Filters'
 
 const IconText = ({ type, text }) => (
   <span>
@@ -11,10 +12,10 @@ const IconText = ({ type, text }) => (
 
 
 const TrackList = props => {
-	console.log("TrackList", props);
 	return (
-		<List
-			style={{margin: '2em auto', width: '80%'}}
+		<Row style={{margin: '2em auto', width: '80%'}}>
+	      <Col span={6}><Filters /></Col>
+	      <Col span={18}><List
 			itemLayout="vertical"
 			size="large"
 			loading={props.tracks.loading}
@@ -43,12 +44,12 @@ const TrackList = props => {
 					<a target="_blank" href={item.collectionViewUrl}>View Collection</a>
 				</List.Item>
 			)}
-		/>
+		/></Col>
+    	</Row>
 	);
 };
 
 function mapStateToProps(state) {
-	console.log('state', state)
 	return { tracks: state.tracks };
 }
 

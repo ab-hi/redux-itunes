@@ -1,4 +1,4 @@
 import Search from './Search'
 import TrackList from './TrackList'
-
-export {Search, TrackList}
+import Filters from './Filters'
+export {Search, TrackList, Filters}
