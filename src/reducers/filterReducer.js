@@ -1,10 +1,9 @@
-export default (state={}, action) => {
+export default (state={genres:[], artists:[]}, action) => {
 	switch(action.type){
-		case 'FILTER_GENRE':
-			console.log('filter reducer', action.payload)
-			return state
-		case 'FILTER_ARTIST':
-			return state
+		case 'GENRE_LIST':
+			return {...state, genres: action.genres}
+		case 'ARTIST_LIST':
+			return {...state, artists: action.artists}
 		default:
 			return state
 	}

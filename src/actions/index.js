@@ -5,11 +5,18 @@ const handleSearch = (query) => {
 	})
 }
 
-const onGenreChange = (filter, tracks) => {
+const onGenreChange = (filter) => {
 	return({
 		type: 'FILTER_GENRE',
-		payload : {filter, tracks}
+		payload : filter
 	})
 }
 
-export {handleSearch, onGenreChange}
+const onArtistChange = (filter) => {
+	return({
+		type: 'FILTER_ARTIST',
+		payload : filter
+	})
+}
+
+export {handleSearch, onGenreChange, onArtistChange}

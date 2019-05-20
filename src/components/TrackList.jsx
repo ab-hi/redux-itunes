@@ -1,51 +1,92 @@
 import React from "react";
-import { List, Avatar, Icon, Row, Col } from "antd";
+import { List, Icon, Row, Col, Typography } from "antd";
 import { connect } from "react-redux";
-import Filters from './Filters'
+import Filters from "./Filters";
 
 const IconText = ({ type, text }) => (
-  <span>
-    <Icon type={type} style={{ marginRight: 8 }} />
-    {text}
-  </span>
+	<span>
+		<Icon type={type} style={{ marginRight: 8 }} />
+		{text}
+	</span>
 );
-
 
 const TrackList = props => {
 	return (
-		<Row style={{margin: '2em auto', width: '80%'}}>
-	      <Col span={6}><Filters /></Col>
-	      <Col span={18}><List
-			itemLayout="vertical"
-			size="large"
-			loading={props.tracks.loading}
-			dataSource={props.tracks.tracks}
-			renderItem={item => (
-				<List.Item
-					key={item.trackId}
-					actions={[
-						<IconText type="dollar" text={item.trackPrice} />,
-						<IconText type="file-zip" text={item.collectionPrice} />,
-						<IconText type="sound" text={item.primaryGenreName} />
-					]}
-					extra={
-						<img
-							width={100}
-							alt="logo"
-							src={item.artworkUrl100}
-						/>
-					}
-				>
-					<List.Item.Meta
-						// avatar={<Avatar src={item.artworkUrl30} />}
-						title={<a target="_blank" href={item.trackViewUrl}>{item.trackName}</a>}
-						description={<a target="_blank" href={item.artistViewUrl}>{item.artistName}</a>}
+		<React.Fragment>
+			<Row style={{ margin: "2em auto", width: "80%" }}>
+				<p>
+					<Typography.Text type="secondary">
+						Showing {props.tracks.tracks.length} results
+					</Typography.Text>
+				</p>
+				<Col span={6}>
+					<Filters />
+				</Col>
+				<Col span={17} offset={1}>
+					<List
+						itemLayout="vertical"
+						size="large"
+						loading={props.tracks.loading}
+						dataSource={props.tracks.tracks}
+						renderItem={item => (
+							<List.Item
+								key={item.trackId}
+								actions={[
+									<IconText
+										type="dollar"
+										text={item.trackPrice}
+									/>,
+									<IconText
+										type="file-zip"
+										text={item.collectionPrice}
+									/>,
+									<IconText
+										type="sound"
+										text={item.primaryGenreName}
+									/>
+								]}
+								extra={
+									<img
+										width={100}
+										alt="logo"
+										src={item.artworkUrl100}
+									/>
+								}
+							>
+								<List.Item.Meta
+									// avatar={<Avatar src={item.artworkUrl30} />}
+									title={
+										<a
+											rel="noopener noreferrer"
+											target="_blank"
+											href={item.trackViewUrl}
+										>
+											{item.trackName}
+										</a>
+									}
+									description={
+										<a
+											rel="noopener noreferrer"
+											target="_blank"
+											href={item.artistViewUrl}
+										>
+											{item.artistName}
+										</a>
+									}
+								/>
+								<a
+									target="_blank"
+									rel="noopener noreferrer"
+									href={item.collectionViewUrl}
+								>
+									View Collection
+								</a>
+							</List.Item>
+						)}
 					/>
-					<a target="_blank" href={item.collectionViewUrl}>View Collection</a>
-				</List.Item>
-			)}
-		/></Col>
-    	</Row>
+				</Col>
+			</Row>
+		</React.Fragment>
 	);
 };
 
